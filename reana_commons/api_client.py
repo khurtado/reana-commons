@@ -11,7 +11,7 @@ import json
 import os
 
 import pkg_resources
-from bravado.client import SwaggerClient
+from bravado.client import RequestsClient, SwaggerClient
 from bravado.exception import (HTTPBadRequest, HTTPInternalServerError,
                                HTTPNotFound)
 
@@ -29,7 +29,7 @@ class BaseAPIClient(object):
         json_spec = self._get_spec(spec_file)
         self._client = SwaggerClient.from_spec(
             json_spec,
-            http_client=http_client,
+            http_client=http_client or RequestsClient(ssl_verify=False),
             config={'also_return_response': True})
         if server_url is None:
             raise MissingAPIClientConfiguration(
@@ -61,6 +61,7 @@ class JobControllerAPIClient(BaseAPIClient):
     """REANA-Job-Controller http client class."""
 
     def submit(self,
+               workflow_uuid='',
                experiment='',
                image='',
                cmd='',
@@ -88,7 +89,8 @@ class JobControllerAPIClient(BaseAPIClient):
             'env_vars': {},
             'workflow_workspace': workflow_workspace,
             'job_name': job_name,
-            'cvmfs_mounts': cvmfs_mounts
+            'cvmfs_mounts': cvmfs_mounts,
+            'workflow_uuid': workflow_uuid
         }
 
         response, http_response = self._client.jobs.create_job(job=job_spec).\

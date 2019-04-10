@@ -55,7 +55,7 @@ OPENAPI_SPECS = {
             port=os.getenv('WORKFLOW_CONTROLLER_SERVICE_PORT_HTTP', '5000')),
         'reana_workflow_controller.json'),
     'reana-server': (
-        os.getenv('REANA_SERVER_URL'),
+        os.getenv('REANA_SERVER_URL', 'http://0.0.0.0:80'),
         'reana_server.json'),
     'reana-job-controller': (
         'http://{address}:{port}'.format(
@@ -72,15 +72,13 @@ REANA_READY_CONDITIONS = {'reana_commons.tasks':
                           ['check_predefined_conditions',
                            'check_running_job_count']}
 
-REANA_ENGINE_LOG_LEVEL = os.getenv('ENGINE_LOG_LEVEL', logging.DEBUG)
-"""Level of verbosity for engine logs."""
+REANA_LOG_LEVEL = logging.getLevelName(os.getenv('REANA_LOG_LEVEL', 'ERROR'))
+"""Log verbosity level for REANA components."""
 
-REANA_ENGINE_LOG_FORMAT = os.getenv('ENGINE_LOG_FORMAT',
-                                    '%(asctime)s - '
-                                    '%(name)s - '
-                                    '%(levelname)s - '
-                                    '%(message)s')
-"""Format of engine logs."""
+REANA_LOG_FORMAT = os.getenv('REANA_LOG_FORMAT',
+                             '%(asctime)s | %(name)s | %(threadName)s | '
+                             '%(levelname)s | %(message)s')
+"""REANA components log format."""
 
 CVMFS_REPOSITORIES = {
     'alice.cern.ch': 'alice',
@@ -127,3 +125,12 @@ REANA_CVMFS_SC_TEMPLATE = {
 
 INTERACTIVE_SESSION_TYPES = ['jupyter']
 """List of supported interactive systems."""
+
+REANA_STORAGE_BACKEND = os.getenv('REANA_STORAGE_BACKEND', 'LOCAL')
+"""Storage backend deployed in current REANA cluster."""
+
+REANA_WORKFLOW_UMASK = 0o0002
+"""Umask used for workflow worksapce."""
+
+K8S_DEFAULT_NAMESPACE = "default"
+"""Kubernetes workflow runtime default namespace"""

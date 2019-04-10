@@ -27,7 +27,7 @@ tests_require = [
     'pytest-cache>=1.0',
     'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
-    'pytest-reana>=0.5.0.dev20190116',
+    'pytest-reana==0.5.0.dev20190321',
     'pytest>=3.8'
 ]
 
@@ -38,7 +38,7 @@ extras_require = {
     ],
     'tests': tests_require,
     'kubernetes': [
-        'kubernetes>=6.0.0',
+        'kubernetes>=9.0.0',
     ],
 }
 
@@ -53,13 +53,13 @@ setup_requires = [
 ]
 
 install_requires = [
-    'bravado>=9.0.6,<10.2',
+    'bravado>=10.2,<10.4',
     'celery>=4.1.0,<4.3',
     'checksumdir>=1.1.4,<1.2',
     'click>=7.0,<8.0',
     'jsonschema[format]>=2.6.0,<2.7',
-    'kombu>=4.2.0,<5.0',
-    'Werkzeug==0.14.1',
+    'kombu>=4.2.0,<4.4',
+    'Werkzeug>=0.14.1',
 ]
 
 packages = find_packages()

@@ -19,7 +19,7 @@ readme = open('README.rst').read()
 history = open('CHANGES.rst').read()
 
 tests_require = [
-    'pytest-reana>=0.6.0.dev20190705,<0.7.0',
+    'pytest-reana>=0.6.0,<0.7.0',
 ]
 
 extras_require = {
@@ -29,7 +29,7 @@ extras_require = {
     ],
     'tests': tests_require,
     'kubernetes': [
-        'kubernetes>=9.0.0,<10.0.0',
+        'kubernetes>=10.0.1,<11.0.0',
     ],
 }
 
@@ -47,7 +47,7 @@ install_requires = [
     'bravado>=10.2,<10.4',
     'checksumdir>=1.1.4,<1.2',
     'click>=7.0',
-    'jsonschema[format]>=2.6.0',
+    'jsonschema[format]>=3.0.1',
     'kombu>=4.6,<4.7',
     'Werkzeug>=0.14.1',
 ]
@@ -87,6 +87,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',

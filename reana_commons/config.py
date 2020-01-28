@@ -158,3 +158,34 @@ REANA_USER_SECRET_MOUNT_PATH = os.getenv(
 )
 """Default mount path for user secrets which is mounted for job pod &
    workflow engines."""
+
+SHARED_VOLUME_PATH = os.getenv('SHARED_VOLUME_PATH', '/var/reana')
+"""Default shared volume path."""
+
+K8S_CERN_EOS_MOUNT_CONFIGURATION = {
+    'volume': {
+        "name": "eos",
+        "hostPath": {
+                "path": "/var/eos"
+        }
+    },
+    'volumeMounts':   {
+        "name": "eos",
+        "mountPath": "/eos",
+        "mountPropagation": "HostToContainer"
+    }
+}
+"""Configuration to mount EOS in Kubernetes objects.
+
+For more information see the official documentation at
+https://clouddocs.web.cern.ch/containers/tutorials/eos.html.
+"""
+
+K8S_CERN_EOS_AVAILABLE = os.getenv('K8S_CERN_EOS_AVAILABLE')
+"""Whether EOS is available in the current cluster or not.
+
+This a configuration set by the system administrators through REANA-Cluster.
+"""
+
+K8S_REANA_SERVICE_ACCOUNT_NAME = os.getenv('K8S_REANA_SERVICE_ACCOUNT_NAME')
+"""REANA service account in the deployed Kubernetes cluster."""
